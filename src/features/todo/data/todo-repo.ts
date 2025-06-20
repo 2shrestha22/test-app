@@ -1,37 +1,47 @@
-import { Todo } from "@/features/todo/data/type";
+import { TodoDao } from "@/core/data/database/dao/todo-dao";
+import { Todo } from "@/core/data/database/entity/todo";
+import { TodoParams } from "@/features/todo/data/type";
 
 export class TodoRepo {
-  static todos: Todo[] = [
-    {
-      id: Date.now().toString(),
-      title: "Todo 1",
-      completed: false,
-    },
-  ];
-
-  static async getTodos(): Promise<Todo[]> {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    return this.todos;
+  static async getTodos(): Promise<TodoParams[]> {
+    return TodoDao.getAll().map((todo) => ({
+      id: todo.id.toString(),
+      title: todo.title,
+      completed: todo.completed,
+    }));
   }
 
-  static async updateTodo(todo: Todo): Promise<Todo> {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    this.todos = this.todos.map((t) => (t.id === todo.id ? todo : t));
+  static async updateTodo(todo: TodoParams): Promise<TodoParams> {
+    await fakeRandomApiDelay();
+    const updatedTodo = TodoDao.update(todo.id!, {
+      title: todo.title,
+      completed: todo.completed,
+    });
+
+    if (!updatedTodo) {
+      throw new Error("Todo not found in database");
+    }
+
     return todo;
   }
 
   static async createTodo(title: string): Promise<Todo> {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    this.todos.push({
-      id: Date.now().toString(),
-      title,
+    await fakeRandomApiDelay();
+    const newTodo: Todo = TodoDao.add({
+      title: title,
       completed: false,
     });
-    return this.todos[this.todos.length - 1];
+
+    return newTodo;
   }
 
   static async deleteTodo(id: string): Promise<void> {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    this.todos = this.todos.filter((todo) => todo.id !== id);
+    await fakeRandomApiDelay();
+    TodoDao.delete(id);
   }
+}
+
+// fake random API delay
+function fakeRandomApiDelay() {
+  return new Promise((resolve) => setTimeout(resolve, Math.random() * 1000));
 }

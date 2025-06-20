@@ -1,7 +1,7 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import React from "react";
 
-import { Todo } from "@/features/todo/data/type";
+import { TodoParams } from "@/features/todo/data/type";
 import { Text, TouchableOpacity, View } from "react-native";
 
 export default function TodoItem({
@@ -9,7 +9,7 @@ export default function TodoItem({
   onTap,
   onDelete,
 }: {
-  item: Todo;
+  item: TodoParams;
   onTap?: () => void;
   onDelete?: () => void;
 }) {

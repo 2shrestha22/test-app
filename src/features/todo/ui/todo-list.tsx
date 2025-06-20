@@ -1,5 +1,9 @@
 import TodoItem from "@/features/todo/ui/components/todo-item";
-import { useDeleteTodo, useTodos, useUpdateTodo } from "@/features/todo/ui/hooks/use-todo";
+import {
+  useDeleteTodo,
+  useTodos,
+  useUpdateTodo,
+} from "@/features/todo/ui/hooks/use-todo";
 import { ActivityIndicator, FlatList, SafeAreaView, Text } from "react-native";
 
 export default function TodoList() {
@@ -13,6 +17,11 @@ export default function TodoList() {
       {isError && (
         <Text className="text-red-500 p-4 text-center">{error?.message}</Text>
       )}
+      {!isLoading && isSuccess && data && data.length === 0 && (
+        <Text className="text-center text-gray-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          No todos found
+        </Text>
+      )}
       {!isLoading && isSuccess && data && (
         <FlatList
           className="p-4 pt-0"
@@ -24,7 +33,7 @@ export default function TodoList() {
                 updateTodo({ ...item, completed: !item.completed });
               }}
               onDelete={() => {
-                deleteTodo(item.id);
+                deleteTodo(item.id!);
               }}
             />
           )}

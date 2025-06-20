@@ -1,6 +1,9 @@
 import { TodoRepo } from "@/features/todo/data/todo-repo";
-import { Todo } from "@/features/todo/data/type";
-import { TodoFormType, useCreateTodoSchema } from "@/features/todo/ui/schemas/todo-schema";
+import { TodoParams } from "@/features/todo/data/type";
+import {
+  TodoFormType,
+  useCreateTodoSchema,
+} from "@/features/todo/ui/schemas/todo-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { router } from "expo-router";
@@ -46,7 +49,7 @@ export function useCreateTodo() {
 export function useUpdateTodo() {
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (todo: Todo) => TodoRepo.updateTodo(todo),
+    mutationFn: (todo: TodoParams) => TodoRepo.updateTodo(todo),
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },

@@ -1,13 +1,13 @@
 import { TodoRepo } from "@/features/todo/data/todo-repo";
-import { Todo } from "@/features/todo/data/type";
+import { TodoParams } from "@/features/todo/data/type";
 import { create } from "zustand";
 
 interface TodoStore {
-  todos: Todo[];
+  todos: TodoParams[];
   loading: boolean;
   error: string | null;
   getTodos: () => void;
-  updateTodo: (todo: Todo) => void;
+  updateTodo: (todo: TodoParams) => void;
   addTodo: (title: string) => void;
   deleteTodo: (id: string) => void;
 }
@@ -21,7 +21,7 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
     const todos = await TodoRepo.getTodos();
     set({ todos, loading: false });
   },
-  updateTodo: async (todo: Todo) => {
+  updateTodo: async (todo: TodoParams) => {
     // Store current state before optimistic update
     const previousTodos = get().todos;
 
