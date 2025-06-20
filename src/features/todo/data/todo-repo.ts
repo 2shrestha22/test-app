@@ -1,4 +1,4 @@
-import { Todo } from "./type";
+import { Todo } from "@/features/todo/data/type";
 
 export class TodoRepo {
   static todos: Todo[] = [

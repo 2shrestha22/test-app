@@ -1,11 +1,11 @@
+import { TodoRepo } from "@/features/todo/data/todo-repo";
+import { Todo } from "@/features/todo/data/type";
+import { TodoFormType, useCreateTodoSchema } from "@/features/todo/ui/schemas/todo-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { useForm } from "react-hook-form";
 import { Alert } from "react-native";
-import { TodoRepo } from "../../data/todo-repo";
-import { Todo } from "../../data/type";
-import { TodoFormType, useCreateTodoSchema } from "../schemas/todo-schema";
 
 export function useCreateTodo() {
   const schema = useCreateTodoSchema();

@@ -1,7 +1,8 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import React from "react";
+
+import { Todo } from "@/features/todo/data/type";
 import { Text, TouchableOpacity, View } from "react-native";
-import { Todo } from "../../data/type";
 
 export default function TodoItem({
   item,

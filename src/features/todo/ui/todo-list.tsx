@@ -1,6 +1,6 @@
+import TodoItem from "@/features/todo/ui/components/todo-item";
+import { useDeleteTodo, useTodos, useUpdateTodo } from "@/features/todo/ui/hooks/use-todo";
 import { ActivityIndicator, FlatList, SafeAreaView, Text } from "react-native";
-import TodoItem from "./components/todo-item";
-import { useDeleteTodo, useTodos, useUpdateTodo } from "./hooks/use-todo";
 
 export default function TodoList() {
   const { isLoading, isError, error, isSuccess, data } = useTodos();
