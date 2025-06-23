@@ -9,7 +9,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Alert } from "react-native";
 
 export function useCreateTodo() {
   const { t } = useTranslation();
@@ -31,7 +30,6 @@ export function useCreateTodo() {
 
   const _onCreateTodo = async (data: TodoFormType) => {
     await mutation.mutateAsync(data.title);
-    Alert.alert(t("alerts.todoCreated"));
   };
 
   const onCreateTodo = async () => {
@@ -68,7 +66,6 @@ export function useSoftDeleteTodo() {
   const mutation = useMutation({
     mutationFn: (id: string) => TodoRepo.softDelete(id),
     onSuccess() {
-      Alert.alert(t("alerts.todoDeleted"));
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
@@ -84,7 +81,6 @@ export function useDeleteTodo() {
   const mutation = useMutation({
     mutationFn: (id: string) => TodoRepo.delete(id),
     onSuccess() {
-      Alert.alert(t("alerts.todoRemoved"));
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
