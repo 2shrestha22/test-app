@@ -1,7 +1,5 @@
-import { useTranslation } from "react-i18next";
-import { Text } from "react-native";
+import DeletedTodo from "@/features/todo/ui/deleted-todo";
 
 export default function DeletedTodos() {
-  const { t } = useTranslation();
-  return <Text>{t("todo.deletedTodos")}</Text>;
+  return <DeletedTodo />;
 }

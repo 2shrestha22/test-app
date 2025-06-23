@@ -1,5 +1,5 @@
 import { Todo } from "@/core/data/database/entity/todo";
-import { TodoParams } from "@/features/todo/data/type";
+import { TodoParams } from "@/features/todo/data/types";
 import { Realm } from "@realm/react";
 import { BSON } from "realm";
 import { database } from "../database";
@@ -51,6 +51,17 @@ export class TodoDao {
       }
 
       return existingTodo;
+    });
+  }
+
+  static softDelete(id: string): void {
+    database.write(() => {
+      const objectId = BSON.ObjectId.createFromHexString(id);
+      const existingTodo = database.objectForPrimaryKey(Todo, objectId);
+      if (!existingTodo) {
+        return;
+      }
+      existingTodo.deleted = true;
     });
   }
 

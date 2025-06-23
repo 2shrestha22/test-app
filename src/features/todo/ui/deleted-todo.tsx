@@ -1,45 +1,45 @@
 import TodoItem from "@/features/todo/ui/components/todo-item";
-import {
-  useSoftDeleteTodo,
-  useTodos,
-  useUpdateTodo,
-} from "@/features/todo/ui/hooks/use-todo";
+import { useDeletedTodoStore } from "@/store/deleted-todo-store";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, FlatList, SafeAreaView, Text } from "react-native";
 
-export default function TodoList() {
+export default function DeletedTodo() {
   const { t } = useTranslation();
-  const { isLoading, isError, error, isSuccess, data: allTodos } = useTodos();
-  const data = allTodos?.filter((todo) => !todo.deleted);
+  const {
+    todos,
+    isLoading: isLoading,
+    error,
+    getTodos,
+    deleteTodo,
+  } = useDeletedTodoStore();
+  const data = todos?.filter((todo) => todo.deleted);
 
-  const { softDeleteTodo } = useSoftDeleteTodo();
-  const { updateTodo } = useUpdateTodo();
+  useEffect(() => {
+    getTodos();
+  }, [getTodos]);
 
   return (
     <SafeAreaView className="flex-1">
       {isLoading && <ActivityIndicator className="flex-1" />}
-      {isError && (
-        <Text className="text-red-500 p-4 text-center">{error?.message}</Text>
-      )}
-      {!isLoading && isSuccess && data && data.length === 0 && (
+      {error && <Text className="text-red-500 p-4 text-center">{error}</Text>}
+      {!isLoading && data && data.length === 0 && (
         <Text className="text-center text-gray-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           {t("todo.noTodosFound")}
         </Text>
       )}
-      {!isLoading && isSuccess && data && (
+      {!isLoading && data && (
         <FlatList
           className="p-4 pt-0"
           data={data}
           renderItem={({ item }) => (
             <TodoItem
-              icon="trash"
+              icon="close-circle"
               item={item}
-              onTap={() => {
-                updateTodo({ ...item, completed: !item.completed });
-              }}
               onDelete={() => {
-                softDeleteTodo(item.id!);
+                deleteTodo(item.id!);
               }}
+              disabled={true}
             />
           )}
         />

@@ -5,6 +5,7 @@ export class Todo extends Realm.Object<Todo> {
   id!: BSON.ObjectId;
   title!: string;
   completed!: boolean;
+  deleted!: boolean;
 
   static schema: Realm.ObjectSchema = {
     name: "Todo",
@@ -13,6 +14,7 @@ export class Todo extends Realm.Object<Todo> {
       id: "objectId",
       title: "string",
       completed: "bool",
+      deleted: { type: "bool", default: false },
     },
   };
 }

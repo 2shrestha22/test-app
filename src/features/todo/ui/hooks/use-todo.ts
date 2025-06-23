@@ -1,5 +1,5 @@
 import { TodoRepo } from "@/features/todo/data/todo-repo";
-import { TodoParams } from "@/features/todo/data/type";
+import { TodoParams } from "@/features/todo/data/types";
 import {
   TodoFormType,
   useCreateTodoSchema,
@@ -12,9 +12,9 @@ import { useTranslation } from "react-i18next";
 import { Alert } from "react-native";
 
 export function useCreateTodo() {
+  const { t } = useTranslation();
   const schema = useCreateTodoSchema();
   const queryClient = useQueryClient();
-  const { t } = useTranslation();
 
   const { control, handleSubmit, reset } = useForm<TodoFormType>({
     resolver: zodResolver(schema),
@@ -31,7 +31,7 @@ export function useCreateTodo() {
 
   const _onCreateTodo = async (data: TodoFormType) => {
     await mutation.mutateAsync(data.title);
-    Alert.alert(t("alerts.todoCreated"), t("alerts.todoCreated"));
+    Alert.alert(t("alerts.todoCreated"));
   };
 
   const onCreateTodo = async () => {
@@ -62,16 +62,32 @@ export function useUpdateTodo() {
   };
 }
 
-export function useDeleteTodo() {
+export function useSoftDeleteTodo() {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (id: string) => TodoRepo.deleteTodo(id),
+    mutationFn: (id: string) => TodoRepo.softDelete(id),
     onSuccess() {
-      Alert.alert(t("alerts.todoDeleted"), t("alerts.todoDeleted"));
+      Alert.alert(t("alerts.todoDeleted"));
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
+
+  return {
+    softDeleteTodo: mutation.mutate,
+  };
+}
+
+export function useDeleteTodo() {
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: (id: string) => TodoRepo.delete(id),
+    onSuccess() {
+      Alert.alert(t("alerts.todoRemoved"));
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+    },
+  });
 
   return {
     deleteTodo: mutation.mutate,

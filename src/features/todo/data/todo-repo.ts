@@ -1,6 +1,6 @@
 import { TodoDao } from "@/core/data/database/dao/todo-dao";
 import { Todo } from "@/core/data/database/entity/todo";
-import { TodoParams } from "@/features/todo/data/type";
+import { TodoParams } from "@/features/todo/data/types";
 
 export class TodoRepo {
   static async getTodos(): Promise<TodoParams[]> {
@@ -8,6 +8,7 @@ export class TodoRepo {
       id: todo.id.toString(),
       title: todo.title,
       completed: todo.completed,
+      deleted: todo.deleted,
     }));
   }
 
@@ -35,7 +36,12 @@ export class TodoRepo {
     return newTodo;
   }
 
-  static async deleteTodo(id: string): Promise<void> {
+  static async softDelete(id: string): Promise<void> {
+    await fakeRandomApiDelay();
+    TodoDao.softDelete(id);
+  }
+
+  static async delete(id: string): Promise<void> {
     await fakeRandomApiDelay();
     TodoDao.delete(id);
   }
@@ -43,5 +49,5 @@ export class TodoRepo {
 
 // fake random API delay
 function fakeRandomApiDelay() {
-  return new Promise((resolve) => setTimeout(resolve, Math.random() * 1000));
+  return new Promise((resolve) => setTimeout(resolve, Math.random() * 500));
 }

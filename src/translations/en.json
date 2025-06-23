@@ -16,6 +16,7 @@
   },
   "alerts": {
     "todoDeleted": "Todo deleted successfully",
-    "todoCreated": "Todo created successfully"
+    "todoCreated": "Todo created successfully",
+    "todoRemoved": "Todo removed successfully"
   }
 }
