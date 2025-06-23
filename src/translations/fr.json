@@ -1,0 +1,21 @@
+{
+  "todo": {
+    "title": "Tâches",
+    "add": "Ajouter",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "complete": "Compléter",
+    "incomplete": "Incomplet",
+    "noTodosFound": "Aucune tâche trouvée",
+    "addTodo": "Ajouter une tâche",
+    "todoTitle": "Titre de la tâche",
+    "enterTodoTitle": "Entrez le titre de la tâche...",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "deletedTodos": "Tâches supprimées"
+  },
+  "alerts": {
+    "todoDeleted": "Tâche supprimée avec succès",
+    "todoCreated": "Tâche créée avec succès"
+  }
+}

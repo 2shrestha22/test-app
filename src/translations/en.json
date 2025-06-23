@@ -1,0 +1,21 @@
+{
+  "todo": {
+    "title": "Todos",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "complete": "Complete",
+    "incomplete": "Incomplete",
+    "noTodosFound": "No todos found",
+    "addTodo": "Add Todo",
+    "todoTitle": "Todo Title",
+    "enterTodoTitle": "Enter todo title...",
+    "cancel": "Cancel",
+    "save": "Save",
+    "deletedTodos": "Deleted Todos"
+  },
+  "alerts": {
+    "todoDeleted": "Todo deleted successfully",
+    "todoCreated": "Todo created successfully"
+  }
+}

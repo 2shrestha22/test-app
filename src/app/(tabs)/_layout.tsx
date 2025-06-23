@@ -1,9 +1,13 @@
+import { LanguageToggleButton } from "@/core/components/language-button";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, Tabs } from "expo-router";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Platform, TouchableOpacity } from "react-native";
 
 export default function TabLayout() {
+  const { t } = useTranslation();
+
   return (
     <Tabs
       screenOptions={{
@@ -20,11 +24,12 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
-          headerTitle: "Todos",
+          title: t("todo.title"),
+          headerTitle: t("todo.title"),
           tabBarIcon: ({ color }) => (
             <Ionicons size={28} name="home" color={color} />
           ),
+          headerLeft: () => <LanguageToggleButton />,
           headerRight: () => (
             <TouchableOpacity
               onPress={() => router.push("/add-todo")}
@@ -36,13 +41,14 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="deleted-todos"
         options={{
-          title: "Explore",
-          headerTitle: "Explore",
+          title: t("todo.deletedTodos"),
+          headerTitle: t("todo.deletedTodos"),
           tabBarIcon: ({ color }) => (
-            <Ionicons size={28} name="planet" color={color} />
+            <Ionicons size={28} name="accessibility" color={color} />
           ),
+          headerLeft: () => <LanguageToggleButton />,
         }}
       />
     </Tabs>

@@ -4,9 +4,11 @@ import {
   useTodos,
   useUpdateTodo,
 } from "@/features/todo/ui/hooks/use-todo";
+import { useTranslation } from "react-i18next";
 import { ActivityIndicator, FlatList, SafeAreaView, Text } from "react-native";
 
 export default function TodoList() {
+  const { t } = useTranslation();
   const { isLoading, isError, error, isSuccess, data } = useTodos();
   const { deleteTodo } = useDeleteTodo();
   const { updateTodo } = useUpdateTodo();
@@ -19,7 +21,7 @@ export default function TodoList() {
       )}
       {!isLoading && isSuccess && data && data.length === 0 && (
         <Text className="text-center text-gray-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          No todos found
+          {t("todo.noTodosFound")}
         </Text>
       )}
       {!isLoading && isSuccess && data && (

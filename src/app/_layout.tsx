@@ -1,5 +1,6 @@
 import { initDatabase } from "@/core/data/database/database";
 import { RealmAppProvider } from "@/core/ui/provider/realm-provider";
+import { initI18n } from "@/i18n/i18n";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
@@ -14,8 +15,13 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    initDatabase();
+    init();
   }, []);
+
+  async function init() {
+    initDatabase();
+    await initI18n();
+  }
 
   if (!loaded) {
     // Async font loading only occurs in development.

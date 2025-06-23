@@ -8,11 +8,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { Alert } from "react-native";
 
 export function useCreateTodo() {
   const schema = useCreateTodoSchema();
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   const { control, handleSubmit, reset } = useForm<TodoFormType>({
     resolver: zodResolver(schema),
@@ -29,7 +31,7 @@ export function useCreateTodo() {
 
   const _onCreateTodo = async (data: TodoFormType) => {
     await mutation.mutateAsync(data.title);
-    Alert.alert("Todo created", "Todo created successfully");
+    Alert.alert(t("alerts.todoCreated"), t("alerts.todoCreated"));
   };
 
   const onCreateTodo = async () => {
@@ -65,10 +67,11 @@ export function useDeleteTodo() {
   const mutation = useMutation({
     mutationFn: (id: string) => TodoRepo.deleteTodo(id),
     onSuccess() {
-      Alert.alert("Todo deleted", "Todo deleted successfully");
+      Alert.alert(t("alerts.todoDeleted"), t("alerts.todoDeleted"));
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
+  const { t } = useTranslation();
 
   return {
     deleteTodo: mutation.mutate,
