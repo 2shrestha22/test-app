@@ -46,7 +46,7 @@ export default function TabLayout() {
           title: t("todo.deletedTodos"),
           headerTitle: t("todo.deletedTodos"),
           tabBarIcon: ({ color }) => (
-            <Ionicons size={28} name="accessibility" color={color} />
+            <Ionicons size={28} name="trash-bin" color={color} />
           ),
           headerLeft: () => <LanguageToggleButton />,
         }}
