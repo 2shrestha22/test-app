@@ -13,10 +13,10 @@ const resources = {
   },
 };
 
-export async function initI18n() {
+export async function initI18n(locale: string) {
   await i18n.use(initReactI18next).init({
     resources,
-    lng: "en",
+    lng: locale,
     fallbackLng: "en",
     interpolation: {
       escapeValue: false,

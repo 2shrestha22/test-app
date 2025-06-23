@@ -1,4 +1,5 @@
 import Realm from "realm";
+import { Locale } from "./entity/locale";
 import { Todo } from "./entity/todo";
 
 // We are exporting an object so that a reference is exported
@@ -6,7 +7,7 @@ import { Todo } from "./entity/todo";
 export let database: Realm = {};
 
 export function initDatabase() {
-  const schema = [Todo];
+  const schema = [Todo, Locale];
   database = new Realm({
     schema,
     schemaVersion: 1,
