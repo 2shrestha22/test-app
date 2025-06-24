@@ -37,7 +37,11 @@ export default function TodoItem({
           {item.title}
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={onDelete} className="ml-2">
+      <TouchableOpacity
+        onPress={onDelete}
+        className="ml-2"
+        accessibilityLabel={icon === "trash" ? "Delete todo" : "Remove todo"}
+      >
         <Ionicons name={icon} size={24} className="text-red-500" />
       </TouchableOpacity>
     </View>

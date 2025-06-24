@@ -8,10 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 
 export function useCreateTodo() {
-  const { t } = useTranslation();
   const schema = useCreateTodoSchema();
   const queryClient = useQueryClient();
 
@@ -61,7 +59,6 @@ export function useUpdateTodo() {
 }
 
 export function useSoftDeleteTodo() {
-  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (id: string) => TodoRepo.softDelete(id),
@@ -76,7 +73,6 @@ export function useSoftDeleteTodo() {
 }
 
 export function useDeleteTodo() {
-  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (id: string) => TodoRepo.delete(id),

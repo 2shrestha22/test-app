@@ -22,7 +22,7 @@ export default function RootLayout() {
   async function init() {
     initDatabase();
     useI18nStore.getState().initializeLocale();
-    await initI18n(useI18nStore.getState().getLocale());
+    await initI18n(useI18nStore.getState().locale);
   }
 
   if (!loaded) {

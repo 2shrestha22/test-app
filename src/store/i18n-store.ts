@@ -3,16 +3,12 @@ import { create } from "zustand";
 
 interface I18nStore {
   locale: string;
-  getLocale: () => string;
   setLocale: (locale: string) => void;
   initializeLocale: () => void;
 }
 
 export const useI18nStore = create<I18nStore>((set, get) => ({
   locale: "en",
-  getLocale: () => {
-    return get().locale;
-  },
 
   setLocale: (locale: string) => {
     database.write(() => {

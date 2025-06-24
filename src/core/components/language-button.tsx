@@ -10,6 +10,7 @@ export const LanguageToggleButton = () => (
       i18n.changeLanguage(i18n.language === "en" ? "fr" : "en");
       useI18nStore.getState().setLocale(i18n.language);
     }}
+    testID="language-toggle-button"
   >
     <Ionicons size={24} name="language" color="#007AFF" />
   </TouchableOpacity>

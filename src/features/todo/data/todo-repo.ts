@@ -26,14 +26,20 @@ export class TodoRepo {
     return todo;
   }
 
-  static async createTodo(title: string): Promise<Todo> {
+  static async createTodo(title: string): Promise<TodoParams> {
     await fakeRandomApiDelay();
     const newTodo: Todo = TodoDao.add({
       title: title,
       completed: false,
+      deleted: false,
     });
 
-    return newTodo;
+    return {
+      id: newTodo.id.toString(),
+      title: newTodo.title,
+      completed: newTodo.completed,
+      deleted: newTodo.deleted,
+    };
   }
 
   static async softDelete(id: string): Promise<void> {

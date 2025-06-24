@@ -1,4 +1,4 @@
-import Realm from "realm";
+import { Realm } from "realm";
 import { Locale } from "./entity/locale";
 import { Todo } from "./entity/todo";
 
