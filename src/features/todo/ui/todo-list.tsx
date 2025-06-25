@@ -4,9 +4,9 @@ import {
   useTodos,
   useUpdateTodo,
 } from "@/features/todo/ui/hooks/use-todo";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, FlatList, Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TodoList() {
   const { t } = useTranslation();
@@ -17,7 +17,7 @@ export default function TodoList() {
   const { updateTodo } = useUpdateTodo();
 
   return (
-    <SafeAreaView className="flex-1">
+    <>
       {isLoading && <ActivityIndicator className="flex-1" />}
       {isError && (
         <Text className="text-red-500 p-4 text-center">{error?.message}</Text>
@@ -45,6 +45,6 @@ export default function TodoList() {
           )}
         />
       )}
-    </SafeAreaView>
+    </>
   );
 }
