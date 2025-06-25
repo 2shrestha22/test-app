@@ -5,7 +5,8 @@ import {
   useUpdateTodo,
 } from "@/features/todo/ui/hooks/use-todo";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, FlatList, SafeAreaView, Text } from "react-native";
+import { ActivityIndicator, FlatList, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TodoList() {
   const { t } = useTranslation();

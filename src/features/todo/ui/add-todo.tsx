@@ -3,13 +3,8 @@ import { router } from "expo-router";
 import React from "react";
 import { useController } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import {
-  ActivityIndicator,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useCreateTodo } from "./hooks/use-todo";
 
 export default function AddTodoScreen() {
